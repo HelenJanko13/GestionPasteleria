@@ -15,6 +15,11 @@ namespace GestionPasteleriaClass {
 			this->cantidad = cantidad;
 		}
 
+		Ingrediente(List<Ingrediente^>^ ingrediente) {
+			//this->Nombre = ingrediente->Nombre;
+			//this->cantidad = ingrediente->cantidad;
+		}
+
 		String^ getNombre() {
 			return Nombre;
 		}
@@ -56,6 +61,8 @@ namespace GestionPasteleriaClass {
 		//List<Ingrediente^>^ ingredientes;
 		List<Receta^>^ recetas;
 
+		
+
 		List<Receta^>^ getRecetas() {
 			return recetas;
 		}
@@ -66,6 +73,17 @@ namespace GestionPasteleriaClass {
 			this->precio = precio;
 			this->CantDisponible = cantDisponible;
 			//this->recetas = recetas;
+		}
+
+		Producto(Producto^producto) {
+			this->_Nombre = producto->_Nombre;
+			//this->_Nombre = _nombre;
+			this->descripcion = producto->descripcion;
+			this->precio = producto->precio;
+			this->CantDisponible = producto->CantDisponible;
+			//
+
+			this->recetas = recetas;
 		}
 		void agregarReceta(Receta^ receta);
 	};
@@ -114,6 +132,7 @@ namespace GestionPasteleriaClass {
 		List<Producto^>^ productos = gcnew List<Producto^>();
 		List<Producto^>^ getProductos() {
 
+			productos->Clear();
 			recorrer(raiz, productos);
 			// Ordenar los productos por su nombre en orden alfabético
 			/*productos->Sort(gcnew Comparison<Producto^>([](Producto^ a, Producto^ b) {
@@ -122,11 +141,13 @@ namespace GestionPasteleriaClass {
 			return productos;
 		}
 
+		
+
 		ArbolGeneralPasteleria() {
 			raiz = nullptr;
 		}
-		void AgregarProducto(String^ nombre, String^ descripcion, double precio, int cantidad);
-		
+		//void AgregarProducto(String^ nombre, String^ descripcion, double precio, int cantidad);
+		void AgregarProducto(Producto^ producto);
 		void AgregarReceta(String^nameproducto, String^ nameReceta, List<Ingrediente^>^ ingredientes, String^ pasos);
 		Nodo^ buscarProductoNodo(Nodo^ nodo, String^ nombreProducto);
 		Producto^ buscarProducto(String^ nombreProducto);
@@ -141,8 +162,31 @@ namespace GestionPasteleriaClass {
 		bool EliminarProducto(String^ nombreProducto) {
 			return eliminarProducto(raiz, nullptr, nombreProducto);
 		}
+
+		List<Nodo^>^ obtenerRecetas(String^ nombreProducto) {
+			Nodo^ nodoProducto = buscarProductoNodo(raiz,nombreProducto);
+			if (nodoProducto != nullptr) {
+				return nodoProducto->hijos;
+			}
+			return gcnew List<Nodo^>();
+		}
 			
-		
+		void agregarIngredienteAReceta(String^ nombreProducto, String^ nombreReceta, Ingrediente^ ingrediente) {
+			// Buscar el producto
+			Producto^ producto = buscarProducto(nombreProducto);
+			if (producto != nullptr) {
+				// Buscar la receta
+				for each (Receta ^ receta in producto->getRecetas()) {
+					if (receta->nombre == nombreReceta) {
+						// Agregar el ingrediente a la receta
+						receta->ingredientes->Add(ingrediente);
+						//MessageBox::Show("Ingrediente Agregado a la Receta");
+						return;
+					}
+				}
+			}
+			//MessageBox::Show("No se encontró el producto o la receta especificada.");
+		}
 		
 	};
 }

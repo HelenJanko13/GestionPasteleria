@@ -680,14 +680,29 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
    //Agregar Producto
 	private: System::Void btnAgregarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		String^ nombre = txtNombreProducto->Text;
+		//String^ nombre = txtNombreProducto->Text;
+			// Obtener el nombre del producto del cuadro de texto
+		String^ nombreProducto = txtNombreProducto->Text;
 		String^ descripcion = txtDescripcionProducto->Text;
 		double precio = Convert::ToDouble(txtPrecioProducto->Text);
 		int cantidad = Convert::ToInt32(txtCantidadProducto->Text);
 
 
-		//Producto^ producto = gcnew Producto(nombre, descripcion, precio, cantidad);
-		pasteleria->AgregarProducto(nombre, descripcion, precio, cantidad);
+		Producto^ newproducto = gcnew Producto(nombreProducto, descripcion, precio, cantidad);
+		//pasteleria->AgregarProducto(nombre, descripcion, precio, cantidad);
+
+	
+
+		// Crear una nueva lista de recetas para este producto
+		List<Receta^>^ recetasProducto = gcnew List<Receta^>();
+		//recetasProducto->Add(descripcion,precio,cantidad);
+
+		// Agregar el producto a la pasteleria
+		pasteleria->AgregarProducto(newproducto);
+
+		// Agregar el producto a la lista de productos en la interfaz de usuario
+		//listProductos->Items->Add(nombreProducto);
+
 		MessageBox::Show("Producto Agregado");
 
 		txtCantidadProducto->Clear();
@@ -702,14 +717,22 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 	//Agregar Ingrediente
 	private: System::Void buttonAddIngrediente_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		
+		// Buscar el producto
+		//Producto^ producto = pasteleria->buscarProducto(nombreProducto);
 		if (!String::IsNullOrEmpty(textBoxIgredientes->Text)) {
-			//String^ _Nombre;
-			Ingrediente^ ingrediente = gcnew Ingrediente("","");
-			ingrediente->setNombre(textBoxIgredientes->Text);
-			//textBoxIgredientes->Text += "\n";
+
+			String^ nombreProducto = txtNombreProducto->Text;
+			String^ nombreReceta = txtNombreReceta->Text;
+			Ingrediente^ ingrediente = gcnew Ingrediente(textBoxIgredientes->Text,"");
+			pasteleria->agregarIngredienteAReceta(nombreProducto, nombreReceta, ingrediente);
 			listaingredientes->Add(ingrediente);
 		}
+			////String^ _Nombre;
+			//Ingrediente^ ingrediente = gcnew Ingrediente("","");
+			//ingrediente->setNombre(textBoxIgredientes->Text);
+			////textBoxIgredientes->Text += "\n";
+			/*listaingredientes->Add(ingrediente);*/
+	//	}
 
 		textBoxIgredientes->Clear();
 		MessageBox::Show("Ingrediente Agregado");
@@ -720,13 +743,15 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 
 		String^ nombreProducto = textBoxnameproducto2->Text;
 		String^ nombreReceta = textBoxNombreReceta->Text;
+		List<Ingrediente^>^ listaingredientesReceta = gcnew List<Ingrediente^>(listaingredientes);
 		//String^ ingredientes = textBoxIgredientes->Text;
 		String^ preparacion = textBoxPreparacion->Text;
+		//Ingrediente^ ingrediente = gcnew Ingrediente(textBoxIgredientes->Text, "");
 
 		//Receta^ receta = gcnew Receta(nombreReceta, listaingredientes, preparacion);
 
 		//Receta^ receta = gcnew Receta( nombreReceta, listaingredientes, preparacion);
-		pasteleria->AgregarReceta(nombreProducto,nombreReceta,listaingredientes,preparacion);
+		pasteleria->AgregarReceta(nombreProducto,nombreReceta,listaingredientesReceta,preparacion);
 
 		textBoxnameproducto2->Clear();
 
@@ -740,14 +765,17 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 	private: System::Void btnEliminarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		// Obtener el nombre del producto a eliminar
-		String^ nombreProducto = txtNombreProducto->Text;
+		String^ nombreProductoEl = txtNombreProducto->Text;
 
 		// Eliminar el producto del árbol
-		bool eliminado = pasteleria->EliminarProducto(nombreProducto);
+		bool eliminado = pasteleria->EliminarProducto(nombreProductoEl);
 
 		if (eliminado) {
 			// Mostrar un mensaje de éxito si se eliminó el producto
 			MessageBox::Show("Producto eliminado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+
+			
 		}
 		else {
 			// Mostrar un mensaje de error si no se pudo eliminar el producto
@@ -756,6 +784,8 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 
 		// Limpiar el TextBox después de intentar eliminar el producto
 		txtEliminarNombreProducto->Text = "";
+
+
 	}
 		   
 		   //Eliminar Receta
@@ -792,15 +822,17 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 
 			// Iterar a través de todos los productos en 'pasteleria'
 			for each (Producto ^ producto in pasteleria->getProductos()) {
-				listPasteleria->Items->Add("Nombre: " + producto->_Nombre);
-				listPasteleria->Items->Add("Precio: " + producto->precio);
-				listPasteleria->Items->Add("Cantidad: " + producto->CantDisponible);
-				listPasteleria->Items->Add("Descripcion: " + producto->descripcion);
-				//listPasteleria->Items->Add("Recetas: ");
+				if (producto != nullptr) {
+					listPasteleria->Items->Add("Nombre: " + producto->_Nombre);
+					listPasteleria->Items->Add("Precio: " + producto->precio);
+					listPasteleria->Items->Add("Cantidad: " + producto->CantDisponible);
+					listPasteleria->Items->Add("Descripcion: " + producto->descripcion);
+					//listPasteleria->Items->Add("Recetas: ");
+				}
 			}
 
 		}
-		else {
+		else if  (textBoxmostrarproducto->Text){
 		if (producto != nullptr) {
 			listPasteleria->Items->Add("Nombre: " + producto->_Nombre);
 
@@ -821,44 +853,64 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 		   //Mostrar Recetas
 	private: System::Void buttonMostrarRecetas_Click(System::Object^ sender, System::EventArgs^ e) {
 		listPasteleria->Items->Clear();
-
-		
-
 		listRecetasProducto->Items->Clear();
 		String^ nombreProducto = textBoxmostrarproducto->Text;
+
+		List<Nodo^>^ recetas = pasteleria->obtenerRecetas(nombreProducto);
 		Producto^ producto = pasteleria->buscarProducto(nombreProducto);
 
-		List<Receta^>^ recetas = producto->getRecetas();
-
-		//if (String::IsNullOrEmpty(textBoxmostrarproducto->Text)) {
-
-		//	// Iterar a través de todos los productos en 'pasteleria'
-		//	for each (Producto ^ producto in pasteleria->getProductos()) {
-		//		listPasteleria->Items->Add("Nombre: " + producto->_Nombre);
-		//		listPasteleria->Items->Add("Recetas: ");
-		//		for (int i = 0; i < producto->getRecetas()->Count; i++) {
-		//			listRecetasProducto->Items->Add(producto->getRecetas()[i]->getNombre());
-		//		}
-		//	}
-
-		//}
-		//else {
 			if (producto != nullptr) {
-				lstRecetas->Items->Add("Nombre: " + producto->_Nombre);
+				//List<Receta^> recetas = producto->obtenerRecetas;
+				listRecetasProducto->Items->Add("Nombre: " + producto->_Nombre);
 				//lstRecetas->Items->Add("Descripcion: " + producto->descripcion);
-				lstRecetas->Items->Add("Recetas: ");
+				listRecetasProducto->Items->Add("Recetas: ");
 				// Agregar las recetas del producto a la lista de recetas en la interfaz de usuario
-				for each (Receta ^ receta in recetas) {
-					lstRecetas->Items->Add(receta->nombre);
-					lstRecetas->Items->Add("Ingredientes: ");
-					for each (Ingrediente ^ ingrediente in receta->ingredientes) {
-						lstRecetas->Items->Add(ingrediente->getNombre());
+				for each (Nodo ^ nodoreceta in recetas) {
+					if (nodoreceta != nullptr) {
+
+						Receta^ receta = nodoreceta->receta;
+						if (receta != nullptr) {
+							listRecetasProducto->Items->Add(receta->nombre);
+							listRecetasProducto->Items->Add("Ingredientes: ");
+							for each (Ingrediente ^ ingrediente in receta->ingredientes) {
+								listRecetasProducto->Items->Add("- " + ingrediente->Nombre);
+							}
+						}
+						
 					}
 				}
 			}
 			else {
 				MessageBox::Show("No se encontró el producto especificado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
+
+		//// Buscar el nodo del producto
+		//Nodo^ nodoProducto = pasteleria->buscarProductoNodo(pasteleria->raiz, nombreProducto);
+
+		//// Verificar si el nodo del producto existe
+		//if (nodoProducto != nullptr)
+		//{
+		//	// Obtener las recetas del producto
+		//	List<Receta^>^ recetas = nodoProducto->producto->getRecetas();
+
+		//	// Iterar a través de las recetas
+		//	for each (Receta ^ receta in recetas)
+		//	{
+		//		// Mostrar el nombre de la receta
+		//		Console::WriteLine("Receta: " + receta->nombre);
+
+		//		// Mostrar los ingredientes de la receta
+		//		Console::WriteLine("Ingredientes:");
+		//		for each (Ingrediente ^ ingrediente in receta->ingredientes)
+		//		{
+		//			Console::WriteLine("- " + ingrediente->Nombre);
+		//		}
+		//	}
+		//}
+		//else
+		//{
+		//	// Mostrar un mensaje si el producto no existe
+		//	Console::WriteLine("El producto especificado no existe.");
 		//}
 	
 	}
