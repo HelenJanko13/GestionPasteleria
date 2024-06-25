@@ -180,12 +180,11 @@ namespace GestionPasteleriaClass {
 					if (receta->nombre == nombreReceta) {
 						// Agregar el ingrediente a la receta
 						receta->ingredientes->Add(ingrediente);
-						//MessageBox::Show("Ingrediente Agregado a la Receta");
+
 						return;
 					}
 				}
 			}
-			//MessageBox::Show("No se encontró el producto o la receta especificada.");
 		}
 		
 	};

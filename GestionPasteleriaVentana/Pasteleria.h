@@ -56,21 +56,14 @@ namespace GestionPasteleriaVentana {
 		System::Windows::Forms::Label^ lblDescripcionProducto;
 		System::Windows::Forms::Label^ lblPrecioProducto;
 		System::Windows::Forms::Label^ lblCantidadProducto;
-		System::Windows::Forms::Label^ lblNombreReceta;
-		System::Windows::Forms::Label^ lblNombreProductoReceta;
-		System::Windows::Forms::Label^ lblEliminarNombreProducto;
-		System::Windows::Forms::Label^ lblEliminarNombreProductoReceta;
-		System::Windows::Forms::Label^ lblEliminarNombreReceta;
+	
 		//Botones
 		System::Windows::Forms::Button^ btnAgregarProducto;
 		System::Windows::Forms::Button^ btnAgregarReceta;
 		System::Windows::Forms::Button^ btnEliminarProducto;
 		System::Windows::Forms::Button^ btnEliminarReceta;
 		//Listas
-		System::Windows::Forms::ListBox^ lstProductos;
-		System::Windows::Forms::ListBox^ lstRecetas;
-		//Listas de ingredientes
-		//System::Windows::Forms::ListBox^ lstIngredientes;
+	
 		
 		// Controles de interfaz
 		System::Windows::Forms::TextBox^ txtNombreProducto;
@@ -78,22 +71,12 @@ namespace GestionPasteleriaVentana {
 		System::Windows::Forms::TextBox^ txtPrecioProducto;
 		System::Windows::Forms::TextBox^ txtCantidadProducto;
 		System::Windows::Forms::TextBox^ txtNombreReceta;
-		System::Windows::Forms::TextBox^ txtNombreProductoReceta;
-		System::Windows::Forms::TextBox^ txtEliminarNombreProducto;
-		System::Windows::Forms::TextBox^ txtEliminarNombreProductoReceta;
-		System::Windows::Forms::TextBox^ txtEliminarNombreReceta;
+	
 	private: System::Windows::Forms::Label^ labelIngredientes;
 
 	private: System::Windows::Forms::TextBox^ textBoxnameproducto2;
 	private: System::Windows::Forms::TextBox^ textBoxIgredientes;
 
-
-
-
-
-
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Label^ labelNombreProducto6;
 	private: System::Windows::Forms::Label^ labelPreparacion;
 
@@ -122,7 +105,8 @@ namespace GestionPasteleriaVentana {
 	private: System::Windows::Forms::TextBox^ textBoxmostrarproducto;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ buttonMostrarRecetas;
-private: System::Windows::Forms::GroupBox^ groupBox3;
+    private: System::Windows::Forms::GroupBox^ groupBox3;
+	private: System::Windows::Forms::Button^ buttoncancelar;
 
 
 
@@ -166,24 +150,14 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			this->btnAgregarReceta = (gcnew System::Windows::Forms::Button());
 			this->btnEliminarReceta = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->lblNombreReceta = (gcnew System::Windows::Forms::Label());
-			this->lblNombreProductoReceta = (gcnew System::Windows::Forms::Label());
-			this->lblEliminarNombreProducto = (gcnew System::Windows::Forms::Label());
-			this->lblEliminarNombreProductoReceta = (gcnew System::Windows::Forms::Label());
-			this->lblEliminarNombreReceta = (gcnew System::Windows::Forms::Label());
-			this->lstProductos = (gcnew System::Windows::Forms::ListBox());
-			this->lstRecetas = (gcnew System::Windows::Forms::ListBox());
 			this->txtNombreReceta = (gcnew System::Windows::Forms::TextBox());
-			this->txtNombreProductoReceta = (gcnew System::Windows::Forms::TextBox());
-			this->txtEliminarNombreProducto = (gcnew System::Windows::Forms::TextBox());
-			this->txtEliminarNombreProductoReceta = (gcnew System::Windows::Forms::TextBox());
-			this->txtEliminarNombreReceta = (gcnew System::Windows::Forms::TextBox());
 			this->listPasteleria = (gcnew System::Windows::Forms::ListBox());
 			this->listRecetasProducto = (gcnew System::Windows::Forms::ListBox());
 			this->buttonMostrarProductos = (gcnew System::Windows::Forms::Button());
 			this->textBoxmostrarproducto = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->buttonMostrarRecetas = (gcnew System::Windows::Forms::Button());
+			this->buttoncancelar = (gcnew System::Windows::Forms::Button());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -479,89 +453,12 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"GESTION PASTELERIA";
 			// 
-			// lblNombreReceta
-			// 
-			this->lblNombreReceta->Location = System::Drawing::Point(0, 0);
-			this->lblNombreReceta->Name = L"lblNombreReceta";
-			this->lblNombreReceta->Size = System::Drawing::Size(100, 23);
-			this->lblNombreReceta->TabIndex = 0;
-			// 
-			// lblNombreProductoReceta
-			// 
-			this->lblNombreProductoReceta->Location = System::Drawing::Point(0, 0);
-			this->lblNombreProductoReceta->Name = L"lblNombreProductoReceta";
-			this->lblNombreProductoReceta->Size = System::Drawing::Size(100, 23);
-			this->lblNombreProductoReceta->TabIndex = 0;
-			// 
-			// lblEliminarNombreProducto
-			// 
-			this->lblEliminarNombreProducto->Location = System::Drawing::Point(0, 0);
-			this->lblEliminarNombreProducto->Name = L"lblEliminarNombreProducto";
-			this->lblEliminarNombreProducto->Size = System::Drawing::Size(100, 23);
-			this->lblEliminarNombreProducto->TabIndex = 0;
-			// 
-			// lblEliminarNombreProductoReceta
-			// 
-			this->lblEliminarNombreProductoReceta->Location = System::Drawing::Point(0, 0);
-			this->lblEliminarNombreProductoReceta->Name = L"lblEliminarNombreProductoReceta";
-			this->lblEliminarNombreProductoReceta->Size = System::Drawing::Size(100, 23);
-			this->lblEliminarNombreProductoReceta->TabIndex = 0;
-			// 
-			// lblEliminarNombreReceta
-			// 
-			this->lblEliminarNombreReceta->Location = System::Drawing::Point(0, 0);
-			this->lblEliminarNombreReceta->Name = L"lblEliminarNombreReceta";
-			this->lblEliminarNombreReceta->Size = System::Drawing::Size(100, 23);
-			this->lblEliminarNombreReceta->TabIndex = 0;
-			// 
-			// lstProductos
-			// 
-			this->lstProductos->Location = System::Drawing::Point(0, 0);
-			this->lstProductos->Name = L"lstProductos";
-			this->lstProductos->Size = System::Drawing::Size(120, 95);
-			this->lstProductos->TabIndex = 0;
-			// 
-			// lstRecetas
-			// 
-			this->lstRecetas->Location = System::Drawing::Point(0, 0);
-			this->lstRecetas->Name = L"lstRecetas";
-			this->lstRecetas->Size = System::Drawing::Size(120, 95);
-			this->lstRecetas->TabIndex = 0;
-			// 
 			// txtNombreReceta
 			// 
 			this->txtNombreReceta->Location = System::Drawing::Point(0, 0);
 			this->txtNombreReceta->Name = L"txtNombreReceta";
 			this->txtNombreReceta->Size = System::Drawing::Size(100, 20);
 			this->txtNombreReceta->TabIndex = 0;
-			// 
-			// txtNombreProductoReceta
-			// 
-			this->txtNombreProductoReceta->Location = System::Drawing::Point(0, 0);
-			this->txtNombreProductoReceta->Name = L"txtNombreProductoReceta";
-			this->txtNombreProductoReceta->Size = System::Drawing::Size(100, 20);
-			this->txtNombreProductoReceta->TabIndex = 0;
-			// 
-			// txtEliminarNombreProducto
-			// 
-			this->txtEliminarNombreProducto->Location = System::Drawing::Point(0, 0);
-			this->txtEliminarNombreProducto->Name = L"txtEliminarNombreProducto";
-			this->txtEliminarNombreProducto->Size = System::Drawing::Size(100, 20);
-			this->txtEliminarNombreProducto->TabIndex = 0;
-			// 
-			// txtEliminarNombreProductoReceta
-			// 
-			this->txtEliminarNombreProductoReceta->Location = System::Drawing::Point(0, 0);
-			this->txtEliminarNombreProductoReceta->Name = L"txtEliminarNombreProductoReceta";
-			this->txtEliminarNombreProductoReceta->Size = System::Drawing::Size(100, 20);
-			this->txtEliminarNombreProductoReceta->TabIndex = 0;
-			// 
-			// txtEliminarNombreReceta
-			// 
-			this->txtEliminarNombreReceta->Location = System::Drawing::Point(0, 0);
-			this->txtEliminarNombreReceta->Name = L"txtEliminarNombreReceta";
-			this->txtEliminarNombreReceta->Size = System::Drawing::Size(100, 20);
-			this->txtEliminarNombreReceta->TabIndex = 0;
 			// 
 			// listPasteleria
 			// 
@@ -594,7 +491,7 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 				static_cast<System::Byte>(0)));
 			this->buttonMostrarProductos->Location = System::Drawing::Point(664, 364);
 			this->buttonMostrarProductos->Name = L"buttonMostrarProductos";
-			this->buttonMostrarProductos->Size = System::Drawing::Size(120, 33);
+			this->buttonMostrarProductos->Size = System::Drawing::Size(118, 30);
 			this->buttonMostrarProductos->TabIndex = 41;
 			this->buttonMostrarProductos->Text = L"Mostrar Productos";
 			this->buttonMostrarProductos->UseVisualStyleBackColor = true;
@@ -604,7 +501,7 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			// 
 			this->textBoxmostrarproducto->BackColor = System::Drawing::SystemColors::InactiveBorder;
 			this->textBoxmostrarproducto->ForeColor = System::Drawing::SystemColors::WindowText;
-			this->textBoxmostrarproducto->Location = System::Drawing::Point(664, 445);
+			this->textBoxmostrarproducto->Location = System::Drawing::Point(664, 446);
 			this->textBoxmostrarproducto->MaxLength = 10;
 			this->textBoxmostrarproducto->Multiline = true;
 			this->textBoxmostrarproducto->Name = L"textBoxmostrarproducto";
@@ -626,19 +523,33 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			// 
 			this->buttonMostrarRecetas->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->buttonMostrarRecetas->Location = System::Drawing::Point(663, 487);
+			this->buttonMostrarRecetas->Location = System::Drawing::Point(662, 488);
 			this->buttonMostrarRecetas->Name = L"buttonMostrarRecetas";
-			this->buttonMostrarRecetas->Size = System::Drawing::Size(120, 33);
+			this->buttonMostrarRecetas->Size = System::Drawing::Size(115, 30);
 			this->buttonMostrarRecetas->TabIndex = 62;
 			this->buttonMostrarRecetas->Text = L"Mostrar Recetas";
 			this->buttonMostrarRecetas->UseVisualStyleBackColor = true;
 			this->buttonMostrarRecetas->Click += gcnew System::EventHandler(this, &Pasteleria::buttonMostrarRecetas_Click);
+			// 
+			// buttoncancelar
+			// 
+			this->buttoncancelar->BackColor = System::Drawing::Color::IndianRed;
+			this->buttoncancelar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttoncancelar->Location = System::Drawing::Point(710, 533);
+			this->buttoncancelar->Name = L"buttoncancelar";
+			this->buttoncancelar->Size = System::Drawing::Size(96, 30);
+			this->buttoncancelar->TabIndex = 46;
+			this->buttoncancelar->Text = L"Cancelar";
+			this->buttoncancelar->UseVisualStyleBackColor = false;
+			this->buttoncancelar->Click += gcnew System::EventHandler(this, &Pasteleria::buttoncancelar_Click);
 			// 
 			// groupBox3
 			// 
 			this->groupBox3->Controls->Add(this->label1);
 			this->groupBox3->Controls->Add(this->buttonMostrarProductos);
 			this->groupBox3->Controls->Add(this->buttonMostrarRecetas);
+			this->groupBox3->Controls->Add(this->buttoncancelar);
 			this->groupBox3->Controls->Add(this->textBoxmostrarproducto);
 			this->groupBox3->Controls->Add(this->listRecetasProducto);
 			this->groupBox3->Controls->Add(this->listPasteleria);
@@ -727,12 +638,7 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			pasteleria->agregarIngredienteAReceta(nombreProducto, nombreReceta, ingrediente);
 			listaingredientes->Add(ingrediente);
 		}
-			////String^ _Nombre;
-			//Ingrediente^ ingrediente = gcnew Ingrediente("","");
-			//ingrediente->setNombre(textBoxIgredientes->Text);
-			////textBoxIgredientes->Text += "\n";
-			/*listaingredientes->Add(ingrediente);*/
-	//	}
+			
 
 		textBoxIgredientes->Clear();
 		MessageBox::Show("Ingrediente Agregado");
@@ -743,15 +649,11 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 
 		String^ nombreProducto = textBoxnameproducto2->Text;
 		String^ nombreReceta = textBoxNombreReceta->Text;
-		List<Ingrediente^>^ listaingredientesReceta = gcnew List<Ingrediente^>(listaingredientes);
-		//String^ ingredientes = textBoxIgredientes->Text;
+	
 		String^ preparacion = textBoxPreparacion->Text;
-		//Ingrediente^ ingrediente = gcnew Ingrediente(textBoxIgredientes->Text, "");
-
-		//Receta^ receta = gcnew Receta(nombreReceta, listaingredientes, preparacion);
-
-		//Receta^ receta = gcnew Receta( nombreReceta, listaingredientes, preparacion);
-		pasteleria->AgregarReceta(nombreProducto,nombreReceta,listaingredientesReceta,preparacion);
+	
+		pasteleria->AgregarReceta(nombreProducto,nombreReceta,listaingredientes,preparacion);
+		listaingredientes->Clear();
 
 		textBoxnameproducto2->Clear();
 
@@ -782,8 +684,7 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			MessageBox::Show("No se encontró el producto especificado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 
-		// Limpiar el TextBox después de intentar eliminar el producto
-		txtEliminarNombreProducto->Text = "";
+		
 
 
 	}
@@ -807,8 +708,7 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			MessageBox::Show("No se encontró la receta especificada.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 
-		// Limpiar el TextBox después de intentar eliminar la receta
-		txtEliminarNombreReceta->Text = "";
+		
 	}
     
 	//Mostrar Productos
@@ -839,10 +739,6 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 			listPasteleria->Items->Add("Precio: " + producto->precio);
 			listPasteleria->Items->Add("Cantidad: " + producto->CantDisponible);
 			listPasteleria->Items->Add("Descripcion: " + producto->descripcion);
-			//listPasteleria->Items->Add("Recetas: ");
-			/*for (int i = 0; i < producto->getRecetas()->Count; i++) {
-				listRecetasProducto->Items->Add(producto->getRecetas()[i]->getNombre());
-			}*/
 		}
 		else {
 			MessageBox::Show("No se encontró el producto especificado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -913,6 +809,10 @@ private: System::Windows::Forms::GroupBox^ groupBox3;
 		//	Console::WriteLine("El producto especificado no existe.");
 		//}
 	
+	}
+
+	private: System::Void buttoncancelar_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
 	}
 
 private: System::Void txtPrecioProducto_TextChanged(System::Object^ sender, System::EventArgs^ e) { //cant

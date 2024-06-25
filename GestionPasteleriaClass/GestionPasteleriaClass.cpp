@@ -119,21 +119,33 @@ bool GestionPasteleriaClass::ArbolGeneralPasteleria::eliminarProducto(Nodo^ nodo
 			padre->hijos->Remove(nodo);
 		}
 		else {
-			// Si es la raíz, necesitamos manejarla de manera diferente
+			// Si es la raíz, promover un nodo hijo a la nueva raíz si es posible
 			if (raiz == nodo) {
-				raiz = nullptr;
+				if (raiz->hijos->Count > 0) {
+					Nodo^ nuevaRaiz = raiz->hijos[0]; // Promover el primer hijo
+					raiz->hijos->RemoveAt(0); // Eliminar el nodo promovido de la lista de hijos de la raíz actual
+					// Transferir los restantes hijos de la raíz actual al nuevo nodo raíz
+					for each (Nodo ^ hijo in raiz->hijos) {
+						nuevaRaiz->hijos->Add(hijo);
+					}
+					raiz = nuevaRaiz; // Establecer la nueva raíz
+				}
+				else {
+					raiz = nullptr; // Si no hay hijos, la raíz se establece a nullptr
+				}
 			}
 		}
-		return true;
+		return true; // Producto eliminado
 	}
 
+	// Buscar recursivamente en los hijos
 	for each (Nodo ^ hijo in nodo->hijos) {
 		if (eliminarProducto(hijo, nodo, nombreProducto)) {
-			return true;
+			return true; // Producto encontrado y eliminado en la subárbol
 		}
 	}
 
-	return false;
+	return false; // Producto no encontrado
 }
 
 GestionPasteleriaClass::Receta^ GestionPasteleriaClass::ArbolGeneralPasteleria::buscarReceta(String^ nombreProducto,String^ nombreReceta)
@@ -153,12 +165,14 @@ GestionPasteleriaClass::Receta^ GestionPasteleriaClass::ArbolGeneralPasteleria::
 
 bool GestionPasteleriaClass::ArbolGeneralPasteleria::eliminarReceta(Nodo^ nodo, String^ nombreProducto, String^ nombreReceta)
 {
+	nombreProducto = nombreProducto->ToLower();
+	nombreReceta = nombreReceta->ToLower();
 	if (nodo == nullptr) return false;
 
-	if (nodo->producto != nullptr && nodo->producto->_Nombre == nombreProducto) {
+	if (nodo->producto != nullptr && nodo->producto->_Nombre->ToLower() == nombreProducto) {
 		for (int i = 0; i < nodo->hijos->Count; i++) {
 			Nodo^ hijo = nodo->hijos[i];
-			if (hijo->receta != nullptr && hijo->receta->nombre == nombreReceta) {
+			if (hijo->receta != nullptr && hijo->receta->nombre->ToLower() == nombreReceta) {
 				nodo->hijos->RemoveAt(i);
 				return true;
 			}
